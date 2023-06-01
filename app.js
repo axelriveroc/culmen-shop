@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = express(); 
 // PUERTO A UTILIZAR 
-const PORT = 3030; 
+const PORT = process.env.PORT; 
 // RUTAS PATH 
 const publicPath = path.join(__dirname ,'/public');
 const cors = require('cors');
