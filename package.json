@@ -4,7 +4,8 @@
   "description": "<h1> E-Commerce \r Nombre: Culmen (originario del latin - singificado cumbre) </h1>",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
