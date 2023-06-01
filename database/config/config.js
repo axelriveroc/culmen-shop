@@ -1,10 +1,10 @@
 module.exports =
 {
   "development": {
-    "username": "culmen" || process.env.DB_USER,
-    "password": "Popi1234" || process.env.PASSWORD,
-    "database": "culmen_shops" || process.env.DB_NAME,
-    "host": "mysql-culmen.alwaysdata.net" ||  process.env.DB_HOST,
+    "username": "culmen" ,
+    "password": "Popi1234" ,
+    "database": "culmen_shops" ,
+    "host": "mysql-culmen.alwaysdata.net" ,
     "dialect": "mysql"
   /*   "port" : process.env.DB_PORT */
   },
