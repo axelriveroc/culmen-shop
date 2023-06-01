@@ -15,7 +15,7 @@ const Clothes_type = db.Clothes_type;
 const Brand_product = db.Brand_product;
 const Waist = db.Waist; 
 
-const productsJSON = fs.readFileSync(path.join(__dirname , '../data/products.json') , 'utf-8');
+//const productsJSON = fs.readFileSync(path.join(__dirname , '../data/products.json') , 'utf-8');
 let products = JSON.parse(productsJSON); 
 
 
@@ -120,7 +120,7 @@ const productsController = {
         }
 
         products.push(newProduct);
-        fs.writeFileSync( path.join(__dirname , '../data/products.JSON') , JSON.stringify(products, null, 2) )
+        //fs.writeFileSync( path.join(__dirname , '../data/products.json') , JSON.stringify(products, null, 2) )
         res.redirect('/products')
     }, 
 
@@ -259,7 +259,7 @@ const productsController = {
                 }; 
             }
         };
-        fs.writeFileSync(  path.join(__dirname , '../data/products.JSON') , JSON.stringify(products, null, 2)); 
+        //fs.writeFileSync(  path.join(__dirname , '../data/products.json') , JSON.stringify(products, null, 2)); 
         res.redirect('/products'); 
     }, 
 
@@ -381,7 +381,7 @@ const productsController = {
         }
 
         products = productsFiltrados; 
-        fs.writeFileSync(  path.join(__dirname , '../data/products.JSON') , JSON.stringify(products , null, 2)); 
+        //fs.writeFileSync(  path.join(__dirname , '../data/products.json') , JSON.stringify(products , null, 2)); 
         res.redirect('/products'); 
     } , 
 
