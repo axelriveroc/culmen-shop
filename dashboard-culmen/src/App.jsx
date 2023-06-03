@@ -14,8 +14,8 @@ function App() {
   const [ users , setUsers ] = useState({});
 
   useEffect( ()=>{
-    const URL_API_PRODUCTS = 'http://localhost:3030/api/products';
-    const URL_API_USERS = 'http://localhost:3030/api/users';
+    const URL_API_PRODUCTS = 'https://culmen-shop.onrender.com/api/products';
+    const URL_API_USERS = 'https://culmen-shop.onrender.com/api/users';
       (async()=>{
         const productsResponse = await fetch(URL_API_PRODUCTS).then(res => res.json());
         setProducts(productsResponse);
