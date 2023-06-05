@@ -75,7 +75,7 @@ module.exports = ( sequelize, DataTypes )=>{
 
     const config = {
 
-        tableName : 'Product', 
+        tableName : 'product', 
         timestamps: false,
         paranoid: true 
     };
