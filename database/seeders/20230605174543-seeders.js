@@ -256,7 +256,7 @@ module.exports = {
     );
     
     await queryInterface.bulkInsert(
-  "Product",
+  "product",
   [
     { idProduct: 1, category_id: 2, clothes_type_id: 1, waist_id: 1, brand_id: 1, name: 'Campera de abrigo Damas', price: 5890, description: 'Una campera de abrigo para damas diseñada para mantenerte cálida y protegida durante tus aventuras en la montaña. ¡Combina estilo y funcionalidad en cada paso!', stars: 0, image_product_id: 3, discount: 0 },
     { idProduct: 2, category_id: 3, clothes_type_id: 3, waist_id: 1, brand_id: 1, name: 'Camisa salidora Hombres', price: 3890, description: 'Una elegante camisa salidora para hombres, perfecta para lucirte en tus excursiones. Su diseño resistente y cómodo te mantendrá fresco en todo momento.', stars: 0, image_product_id: 6, discount: 0 },

@@ -134,7 +134,7 @@ module.exports = {
          },
       });
 
-      await queryInterface.createTable("Product", {
+      await queryInterface.createTable("product", {
            idProduct: {
              type: Sequelize.INTEGER,
              primaryKey: true,
