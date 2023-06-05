@@ -385,8 +385,8 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
 
-    await queryInterface.bulkDelete("Brand_product", null, {});
-    await queryInterface.bulkDelete("Category_product", null, {});
+    await queryInterface.bulkDelete("brand_product", null, {});
+     /*await queryInterface.bulkDelete("Category_product", null, {});
     await queryInterface.bulkDelete('Clothes_type', null, {});
     await queryInterface.bulkDelete("Contact_user", null, {});
     await queryInterface.bulkDelete("Favorite_product", null, {});
@@ -397,7 +397,7 @@ module.exports = {
     await queryInterface.bulkDelete("Sale_by_user", null, {});
     await queryInterface.bulkDelete("Ubication_user", null, {});
     await queryInterface.bulkDelete("User", null, {});
-    await queryInterface.bulkDelete("Waist", null, {});
+    await queryInterface.bulkDelete("Waist", null, {}); */
 
 
 
