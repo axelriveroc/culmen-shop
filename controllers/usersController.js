@@ -105,9 +105,11 @@ const userController = {
             is_admin: 0, //ver aca si va 0 o 1
           });
 
+          let uploadedImage;
+
           const cloudinaryUploadImage = async (file) => {
             try {
-              const uploadedImage = await uploadImage(file.path);
+                uploadedImage = await uploadImage(file.path);
               // Ahora puedes usar uploadedImage.secure_url para obtener la URL de la imagen subida a Cloudinary
               // Actualiza el campo "avatar" en el nuevo usuario creado con la URL de la imagen
               //newUser.avatar = uploadedImage.secure_url;

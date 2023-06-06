@@ -1,5 +1,6 @@
 
 const cloudinary = require("cloudinary").v2;
+//const { v2 as cloudinary } = require('cloudinary');
 
 // Configuration 
 cloudinary.config({
