@@ -8,7 +8,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-module.exports =  async function uploadImage(fieldPath){
+ async function uploadImage(fieldPath){
 
     const result = await cloudinary.uploader.upload(fieldPath, {
         folder: 'users'
@@ -19,4 +19,6 @@ module.exports =  async function uploadImage(fieldPath){
         publicId: result.public_id,
       };
 }
+
+module.exports = uploadImage;
 
