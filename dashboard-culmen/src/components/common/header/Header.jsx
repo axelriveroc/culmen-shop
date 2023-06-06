@@ -15,7 +15,7 @@ const Header = () => {
           <Li><Link className={styles.link} to='/detailLastProduct' >Detail Last Product</Link></Li>
           <Li> <Link className={styles.link} to='/panelCategories' >Panel Categories</Link></Li>
           <Li><Link className={styles.link} to='/productList' >Product List</Link></Li>
-          <Li><Link className={styles.link} to='http://localhost:3030' >Web Site</Link></Li>
+          <Li><Link className={styles.link} to='https://culmen-shop-production.up.railway.app/' >Web Site</Link></Li>
         </Ul>
       </Nav>
     </HeaderContainer>
