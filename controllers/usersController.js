@@ -111,10 +111,8 @@ const userController = {
               // Ahora puedes usar uploadedImage.secure_url para obtener la URL de la imagen subida a Cloudinary
               // Actualiza el campo "avatar" en el nuevo usuario creado con la URL de la imagen
               //newUser.avatar = uploadedImage.secure_url;
-              console.log({uploadedImage: uploadedImage})
               newUser.avatar = uploadedImage.url;
               newUser.publicId = uploadedImage.publicId;
-              console.log({newUser : newUser})
 
               // Guarda el nuevo usuario con la URL de la imagen actualizada
               await newUser.save();
@@ -123,7 +121,12 @@ const userController = {
               console.log(error);
               return res
                 .status(500)
-                .json({ error: "Error al subir la imagen a la nube", file: req.file });
+                .json({
+                  error: "Error al subir la imagen a la nube",
+                  file: req.file,
+                  uploadedImage: uploadedImage,
+                  newUser: newUser,
+                });
             }
           };
 
