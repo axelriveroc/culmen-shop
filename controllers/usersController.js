@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 //const User = require('../models/UserModels'); 
 
 // CLOUDINARY para images
-const { uploadImage } = require("../utils/cloudinary");
+const  uploadImage  = require("../utils/cloudinary");
 
 // SEQUELIZE 
 const { Association } = require("sequelize");
