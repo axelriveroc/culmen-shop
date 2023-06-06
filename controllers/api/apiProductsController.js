@@ -64,8 +64,11 @@ const apiProductsController = {
             }
 
             // crear función para generar el link tanto para next como para previous
+            const protocol = req.headers["x-forwarded-proto"] || req.protocol;
+            const host = req.get("host");
+            
             const buildPageUrl = (page) =>
-            `${req.protocol}://${req.get('host')}/api/products?page=${page}&size=${size}`;
+            `${protocol}://${host}/api/products?page=${page}&size=${size}`;
     
             const nextUrl = currentPage < totalPages ? buildPageUrl(currentPage + 1) : null;
             const previousUrl = currentPage > 1 ? buildPageUrl(currentPage - 1) : null;
@@ -80,7 +83,7 @@ const apiProductsController = {
                     id: p.idProduct, 
                     name: p.name,
                     description: p.description, 
-                    link: `${req.protocol}://${req.get('host')}/api/products/${p.idProduct}`
+                    link: `${protocol}://${host}/api/products/${p.idProduct}`
                 })),
                 status: 200
             })
@@ -94,13 +97,18 @@ const apiProductsController = {
             const product = await Product.findByPk(req.params.id, {
                 include: ['category_product', 'clothes_type', 'imageProduct', 'brand_product', 'waist']
             });
+
+            const protocol = req.headers["x-forwarded-proto"] || req.protocol;
+            const host = req.get("host");
+
+
             return res.json({
                 product: {
                     id: product.idProduct, 
                     name: product.name, 
                     description: product.description, 
                     price: product.price, 
-                    image: `${req.protocol}://${req.get('host')}/products/${product.imageProduct.image_route}`,
+                    image: `${protocol}://${host}/products/${product.imageProduct.image_route}`,
                     category: product.category_product.category, 
                     type: product.clothes_type.type,
                     brand: product.brand_product.brand_name, 
