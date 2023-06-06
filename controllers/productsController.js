@@ -319,6 +319,12 @@ const productsController = {
               id_product: req.params.id
             }
           });
+
+          await db.Favorite_product.destroy({
+            where: {
+                product_id: req.params.id
+            }
+          })
           
         const productDeleted = await Product.destroy({
             where:{
