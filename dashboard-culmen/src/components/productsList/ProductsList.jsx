@@ -21,7 +21,7 @@ const ProductsList = ( { products } ) => {
               <Td>{product.id}</Td>
               <Td>{product.name}</Td>
               <Td>{product.description}</Td>
-              <Td><DetailLink href={`http://localhost:3030/products/${product.id}`}> Ver detalle </DetailLink></Td>
+              <Td><DetailLink href={`https://culmen-shop-production.up.railway.app/products/${product.id}`}> Ver detalle </DetailLink></Td>
             </Tr>
           ))
         }
