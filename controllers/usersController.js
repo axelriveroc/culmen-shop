@@ -121,7 +121,7 @@ const userController = {
               console.log(error);
               return res
                 .status(500)
-                .json({ error: "Error al subir la imagen a la nube" });
+                .json({ error: "Error al subir la imagen a la nube", file: req.file });
             }
           };
 
