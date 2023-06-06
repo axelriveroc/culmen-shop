@@ -99,16 +99,21 @@ module.exports = {
       });
 
       await queryInterface.createTable("image_product", {
-         id: {
-           type: Sequelize.INTEGER,
-           primaryKey: true,
-           autoIncrement: true,
-           allowNull: false,
-         },
-         image_route: {
-           type: Sequelize.STRING,
-           allowNull: false,
-         },
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+        },
+        image_route: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        public_id: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          defaultValue: null,
+        },
       });
 
       await queryInterface.createTable("other_images", {
@@ -281,64 +286,69 @@ module.exports = {
       });
 
       await queryInterface.createTable("user", {
-           iduser: {
-             type: DataTypes.INTEGER,
-             primaryKey: true,
-             autoIncrement: true,
-           },
-           name: {
-             type: DataTypes.STRING(45),
-             allowNull: false,
-           },
-           last_name: {
-             type: DataTypes.STRING(45),
-             allowNull: false,
-           },
-           email: {
-             type: DataTypes.STRING(45),
-             allowNull: false,
-             unique: true,
-           },
-           password: {
-             type: DataTypes.STRING(100),
-             allowNull: false,
-           },
-           avatar: {
-             type: DataTypes.STRING(100),
-             allowNull: false,
-           },
-           is_admin: {
-             type: DataTypes.TINYINT(1),
-             allowNull: false,
-           },
-           contact_user: {
-             type: DataTypes.INTEGER,
-             allowNull: true,
-             references: {
-               model: "contact_user",
-               key: "idcontact_user",
-             },
-           },
-           ubication_user: {
-             type: DataTypes.INTEGER,
-             allowNull: true,
-             references: {
-               model: "ubication_user",
-               key: "idubication_user",
-             },
-           },
-           createdAt: {
-             type: DataTypes.DATE,
-             allowNull: false,
-           },
-           updatedAt: {
-             type: DataTypes.DATE,
-             allowNull: false,
-           },
-           deletedAt: {
-             type: DataTypes.DATE,
-             allowNull: true,
-           },
+        iduser: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        name: {
+          type: DataTypes.STRING(45),
+          allowNull: false,
+        },
+        last_name: {
+          type: DataTypes.STRING(45),
+          allowNull: false,
+        },
+        email: {
+          type: DataTypes.STRING(45),
+          allowNull: false,
+          unique: true,
+        },
+        password: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+        },
+        avatar: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+        },
+        is_admin: {
+          type: DataTypes.TINYINT(1),
+          allowNull: false,
+        },
+        contact_user: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          references: {
+            model: "contact_user",
+            key: "idcontact_user",
+          },
+        },
+        ubication_user: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          references: {
+            model: "ubication_user",
+            key: "idubication_user",
+          },
+        },
+        createdAt: {
+          type: DataTypes.DATE,
+          allowNull: false,
+        },
+        updatedAt: {
+          type: DataTypes.DATE,
+          allowNull: false,
+        },
+        deletedAt: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        public_id: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          defaultValue: null,
+        },
       });
 
       await queryInterface.addConstraint("user", {

@@ -3,16 +3,20 @@ module.exports = ( sequelize, DataTypes )=>{
     const alias = 'Image_product'; 
 
     const col = {
-
-        id: {
-            type: DataTypes.INTEGER , 
-            primaryKey: true,
-            autoIncrement: true
-        },
-        image_route: {
-            type: DataTypes.STRING, 
-            allowNull: false
-        }
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      image_route: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      public_id: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+      },
     }; 
 
     const config ={

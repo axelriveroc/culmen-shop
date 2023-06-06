@@ -2,6 +2,8 @@ const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator'); 
 //const User = require('../models/UserModels'); 
 
+// CLOUDINARY para images
+const { uploadImage } = require("../utils/cloudinary");
 
 // SEQUELIZE 
 const { Association } = require("sequelize");
@@ -59,50 +61,75 @@ const userController = {
     processRegister2: async(req, res)=>{
 
         try{
+          const resultValidation = validationResult(req);
 
-        const resultValidation = validationResult(req); 
-
-        if ( !resultValidation.isEmpty() ) {  // primero verificamos si hay errores
-            return res.render('users/login' , {
-                errors: resultValidation.mapped() , 
-                old: req.body
+          if (!resultValidation.isEmpty()) {
+            // primero verificamos si hay errores
+            return res.render("users/login", {
+              errors: resultValidation.mapped(),
+              old: req.body,
             });
-        }
+          }
 
-       // No Hay errores...
-        let userInDB =  await db.User.findOne({
+          // No Hay errores...
+          let userInDB = await db.User.findOne({
             where: {
-                email : req.body.email
-            }
-        });
+              email: req.body.email,
+            },
+          });
 
-        // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
-        if ( userInDB ) {   
-            return res.render('users/login', {
-                errors: {
-                    email:{
-                        msg: 'Este email ya está registrado'
-                    }
-                }, 
-                old: req.body
+          // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
+          if (userInDB) {
+            return res.render("users/login", {
+              errors: {
+                email: {
+                  msg: "Este email ya está registrado",
+                },
+              },
+              old: req.body,
             });
-        }
+          }
 
-        // sino esta registrado, creamos el nuevo usuario
-        const passwordHasheada = await bcryptjs.hashSync(req.body.password , 10);
+          // sino esta registrado, creamos el nuevo usuario
+          const passwordHasheada = await bcryptjs.hashSync(
+            req.body.password,
+            10
+          );
 
-        const newUser = await db.User.create({
-            name : req.body.name, 
+          const newUser = await db.User.create({
+            name: req.body.name,
             last_name: req.body.lastName,
-            email: req.body.email, 
+            email: req.body.email,
             password: passwordHasheada,
-            avatar: req.file ? req.file.filename : 'imagenUsuario.png', 
-            is_admin: 0 //ver aca si va 0 o 1
-        })
-        //********* Faltaria validar de si es admin poder editar o eliminar un producto/
-        //return res.json(newUser)
-        return res.redirect('user/login') // debe loguearse ahora 
-    }
+            avatar: req.file ? req.file.filename : "imagenUsuario.png",
+            is_admin: 0, //ver aca si va 0 o 1
+          });
+
+          const cloudinaryUploadImage = async (file) => {
+            try {
+              const uploadedImage = await uploadImage(file.path);
+              // Ahora puedes usar uploadedImage.secure_url para obtener la URL de la imagen subida a Cloudinary
+              // Actualiza el campo "avatar" en el nuevo usuario creado con la URL de la imagen
+              //newUser.avatar = uploadedImage.secure_url;
+              newUser.avatar = uploadedImage.url;
+              newUser.publicId = uploadedImage.publicId;
+
+              // Guarda el nuevo usuario con la URL de la imagen actualizada
+              await newUser.save();
+            } catch (error) {
+              // Maneja cualquier error que pueda ocurrir durante la subida de la imagen a Cloudinary
+              console.log(error);
+              return res
+                .status(500)
+                .json({ error: "Error al subir la imagen a la nube" });
+            }
+          };
+
+          // Llama a la función cloudinaryUploadImage pasando req.file como argumento
+          await cloudinaryUploadImage(req.file);
+
+          return res.redirect("user/login"); // debe loguearse ahora
+        }
     catch(err){
         console.log(err)
     }

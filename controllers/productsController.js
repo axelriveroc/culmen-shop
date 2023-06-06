@@ -114,7 +114,6 @@ const productsController = {
             // si llega una imagen
 
             // esto no va a suceder nunca xq multer le pone un nombre unico a cada imagen
-
             // Buscar si ya existe una imagen con el mismo nombre
             const existingImage = await Image_product.findOne({ where: { image_route: req.files.file_img[0].filename } });
             if ( existingImage ) {
