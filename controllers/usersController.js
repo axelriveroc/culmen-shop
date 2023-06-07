@@ -107,7 +107,7 @@ const userController = {
 
           let uploadedImage;
 
-          const cloudinaryUploadImage = async (file) => {
+          /* const cloudinaryUploadImage = async (file) => {
             try {
                 uploadedImage = await uploadImage(file.path);
               // Ahora puedes usar uploadedImage.secure_url para obtener la URL de la imagen subida a Cloudinary
@@ -130,12 +130,11 @@ const userController = {
                   newUser: newUser,
                 });
             }
-          };
-
+          }; */
           // Llama a la función cloudinaryUploadImage pasando req.file como argumento
-          await cloudinaryUploadImage(req.file);
+          //await cloudinaryUploadImage(req.file);
 
-          return res.redirect("user/login"); // debe loguearse ahora
+          return res.redirect("/user/login"); // debe loguearse ahora
         }
     catch(err){
         console.log(err)
