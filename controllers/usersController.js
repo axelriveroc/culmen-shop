@@ -68,26 +68,26 @@ const userController = {
 
     processRegister2: async(req, res)=>{
 
-        try{
-            const resultValidation = validationResult(req);
+        try {
+          const resultValidation = validationResult(req);
 
-            if (!resultValidation.isEmpty()) {
-                // primero verificamos si hay errores
+          if (!resultValidation.isEmpty()) {
+            // primero verificamos si hay errores
             return res.render("users/login", {
               errors: resultValidation.mapped(),
               old: req.body,
             });
-            }
+          }
 
-            // No Hay errores...
-            let userInDB = await db.User.findOne({
+          // No Hay errores...
+          let userInDB = await db.User.findOne({
             where: {
               email: req.body.email,
             },
-            });
+          });
 
-            // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
-            if (userInDB) {
+          // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
+          if (userInDB) {
             return res.render("users/login", {
               errors: {
                 email: {
@@ -96,39 +96,43 @@ const userController = {
               },
               old: req.body,
             });
-            }
+          }
 
-            // sino esta registrado, creamos el nuevo usuario
-            const passwordHasheada = await bcryptjs.hashSync(
+          // sino esta registrado, creamos el nuevo usuario
+          const passwordHasheada = await bcryptjs.hashSync(
             req.body.password,
             10
-            );
+          );
 
-            const newUser = await db.User.create({
+          const newUser = await db.User.create({
             name: req.body.name,
             last_name: req.body.lastName,
             email: req.body.email,
             password: passwordHasheada,
             avatar: req.file ? req.file.filename : "imagenUsuario.png",
             is_admin: 0, //ver aca si va 0 o 1
-            });
+          });
 
-            const result = await cloudinary.uploader.upload(req.file.path, {
-                folder: "users",
-            });
+          const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: "users",
+          });
 
-            newUser.avatar = result.secure_url;
-            newUser.publicId = result.public_id;
+          newUser.avatar = result.secure_url;
+          newUser.publicId = result.public_id;
 
-            await newUser.save();
+          await newUser.save();
 
-            return res.redirect("/user/login"); // debe loguearse ahora
+          return res.redirect("/user/login"); // debe loguearse ahora
+        } catch (err) {
+          console.error(err); // Registra el error en la consola para depuración
+
+          return res.status(500).json({
+            error: "Se ha producido un error en el servidor.",
+            message: err.message, // Agrega el mensaje de error proporcionado por el objeto err
+            stack: err.stack, // Agrega la pila de llamadas del error para obtener más detalles
+          });
         }
-        catch(err){
-            return res.json({
-                error: 'error'
-            })
-        }
+
     },
 
     processLogin: (req, res)=>{
