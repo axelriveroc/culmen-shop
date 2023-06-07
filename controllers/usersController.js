@@ -3,7 +3,15 @@ const { validationResult } = require('express-validator');
 //const User = require('../models/UserModels'); 
 
 // CLOUDINARY para images
-const  uploadImage  = require("../utils/cloudinary");
+//const  uploadImage  = require("../utils/cloudinary");
+const cloudinary = require("cloudinary").v2;
+
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_API_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // SEQUELIZE 
 const { Association } = require("sequelize");
@@ -61,25 +69,25 @@ const userController = {
     processRegister2: async(req, res)=>{
 
         try{
-          const resultValidation = validationResult(req);
+            const resultValidation = validationResult(req);
 
-          if (!resultValidation.isEmpty()) {
-            // primero verificamos si hay errores
+            if (!resultValidation.isEmpty()) {
+                // primero verificamos si hay errores
             return res.render("users/login", {
               errors: resultValidation.mapped(),
               old: req.body,
             });
-          }
+            }
 
-          // No Hay errores...
-          let userInDB = await db.User.findOne({
+            // No Hay errores...
+            let userInDB = await db.User.findOne({
             where: {
               email: req.body.email,
             },
-          });
+            });
 
-          // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
-          if (userInDB) {
+            // preguntamos si existe el usuario en la base de datos , si existe es porque ya esta registado
+            if (userInDB) {
             return res.render("users/login", {
               errors: {
                 email: {
@@ -88,57 +96,39 @@ const userController = {
               },
               old: req.body,
             });
-          }
+            }
 
-          // sino esta registrado, creamos el nuevo usuario
-          const passwordHasheada = await bcryptjs.hashSync(
+            // sino esta registrado, creamos el nuevo usuario
+            const passwordHasheada = await bcryptjs.hashSync(
             req.body.password,
             10
-          );
+            );
 
-          const newUser = await db.User.create({
+            const newUser = await db.User.create({
             name: req.body.name,
             last_name: req.body.lastName,
             email: req.body.email,
             password: passwordHasheada,
             avatar: req.file ? req.file.filename : "imagenUsuario.png",
             is_admin: 0, //ver aca si va 0 o 1
-          });
+            });
 
-          let uploadedImage;
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: "users",
+            });
 
-          /* const cloudinaryUploadImage = async (file) => {
-            try {
-                uploadedImage = await uploadImage(file.path);
-              // Ahora puedes usar uploadedImage.secure_url para obtener la URL de la imagen subida a Cloudinary
-              // Actualiza el campo "avatar" en el nuevo usuario creado con la URL de la imagen
-              //newUser.avatar = uploadedImage.secure_url;
-              newUser.avatar = uploadedImage.url;
-              newUser.publicId = uploadedImage.publicId;
+            newUser.avatar = result.secure_url;
+            newUser.publicId = result.public_id;
 
-              // Guarda el nuevo usuario con la URL de la imagen actualizada
-              await newUser.save();
-            } catch (error) {
-              // Maneja cualquier error que pueda ocurrir durante la subida de la imagen a Cloudinary
-              console.log(error);
-              return res
-                .status(500)
-                .json({
-                  error: "Error al subir la imagen a la nube",
-                  file: req.file,
-                  uploadedImage: uploadedImage,
-                  newUser: newUser,
-                });
-            }
-          }; */
-          // Llama a la función cloudinaryUploadImage pasando req.file como argumento
-          //await cloudinaryUploadImage(req.file);
+            await newUser.save();
 
-          return res.redirect("/user/login"); // debe loguearse ahora
+            return res.redirect("/user/login"); // debe loguearse ahora
         }
-    catch(err){
-        console.log(err)
-    }
+        catch(err){
+            return res.status.json({
+                error: 'error'
+            })
+        }
     },
 
     processLogin: (req, res)=>{
