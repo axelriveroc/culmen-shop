@@ -68,7 +68,7 @@ app.use('/api/products' , apiProductsRoute);
 
 
 /********   CLOUDINARY   ********/
-const cloudinary = require("cloudinary").v2;
+//const cloudinary = require("cloudinary").v2;
 
 // Configuration
 cloudinary.config({
