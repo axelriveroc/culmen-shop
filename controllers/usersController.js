@@ -125,7 +125,7 @@ const userController = {
             return res.redirect("/user/login"); // debe loguearse ahora
         }
         catch(err){
-            return res.status.json({
+            return res.json({
                 error: 'error'
             })
         }
