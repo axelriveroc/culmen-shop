@@ -67,16 +67,6 @@ app.use('/api/users' , apiUsersRoute);
 app.use('/api/products' , apiProductsRoute); 
 
 
-/********   CLOUDINARY   ********/
-const cloudinary = require("cloudinary").v2;
-
-// Configuration
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_API_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 /******************  MANEJADOR DE ERRORES MIDDLEWARE   *********************/
 app.use((err, req, res, next) => {
     console.error(err.stack);
