@@ -1,7 +1,19 @@
 const path = require('path'); 
 const multer = require('multer');
-const { checkFileType } = require('./helpers');
+//const { checkFileType } = require('./helpers');
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
+
+const storage2 = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "users",
+    public_id: (req, file) => "computed-filename-using-request",
+  },
+});
+
+const parser = multer({ storage: storage2 });
 
 
 const fileFilter = (req, file, cb) => {
@@ -28,4 +40,5 @@ const upload = multer({
   storage
   , fileFilter  }); 
 
-module.exports = upload; 
+//module.exports = upload; 
+module.exports =parser;
