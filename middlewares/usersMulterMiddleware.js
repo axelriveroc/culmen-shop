@@ -16,7 +16,7 @@ const storage2 = new CloudinaryStorage({
 const parser = multer({ storage: storage2 });
 
 
-const fileFilter = (req, file, cb) => {
+/* const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
       cb(null, true);
     } else {
@@ -34,11 +34,11 @@ const storage = multer.diskStorage({
         const newFilename = 'avatar-' + Date.now() + path.extname(file.originalname);
         cb( null , newFilename ); 
     }
-}); 
+});  */
 
-const upload = multer({ 
+/* const upload = multer({ 
   storage
-  , fileFilter  }); 
+  , fileFilter  });  */
 
 //module.exports = upload; 
 module.exports =parser;
