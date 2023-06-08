@@ -106,7 +106,7 @@ const userController = {
             is_admin: 0, //ver aca si va 0 o 1
           });
 
-          const result = await uploadImage(req.file)
+          const result = await uploadImage(req.file.path)
 
           newUser.avatar = result.url;
           newUser.publicId = result.publicId;
