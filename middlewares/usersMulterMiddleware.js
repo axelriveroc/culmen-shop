@@ -15,6 +15,7 @@ const storage2 = new CloudinaryStorage({
 
 const parser = multer({ storage: storage2 });
 
+module.exports =parser;
 
 /* const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
@@ -41,4 +42,3 @@ const storage = multer.diskStorage({
   , fileFilter  });  */
 
 //module.exports = upload; 
-module.exports =parser;
