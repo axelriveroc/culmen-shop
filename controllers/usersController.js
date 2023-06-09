@@ -2,9 +2,7 @@ const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator'); 
 //const User = require('../models/UserModels'); 
 
-// CLOUDINARY para images
-const  uploadImage  = require("../utils/cloudinary");
-
+const uploadImage = require("../utils/cloudinary");
 
 // SEQUELIZE 
 const { Association } = require("sequelize");
@@ -106,10 +104,12 @@ const userController = {
             is_admin: 0, //ver aca si va 0 o 1
           });
 
-          const result = await uploadImage(req.file.path)
+          const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: "users",
+          });
 
-          newUser.avatar = result.url;
-          newUser.publicId = result.publicId;
+          newUser.avatar = result.secure_url;
+          newUser.publicId = result.public_id;
 
           await newUser.save();
 
