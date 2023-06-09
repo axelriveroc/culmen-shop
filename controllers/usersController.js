@@ -102,12 +102,10 @@ const userController = {
             is_admin: 0, //ver aca si va 0 o 1
           });
 
-          /* const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: "users",
-          });
+          
 
-          newUser.avatar = result.secure_url;
-          newUser.publicId = result.public_id; */
+          newUser.avatar = req.file.path;
+          newUser.publicId = req.file.public_id; 
 
           await newUser.save();
 
