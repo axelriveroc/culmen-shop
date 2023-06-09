@@ -105,7 +105,7 @@ const userController = {
           
 
           newUser.avatar = req.file.path;
-          newUser.publicId = req.file.public_id; 
+          newUser.public_id = req.file.public_id; 
 
           await newUser.save();
 
