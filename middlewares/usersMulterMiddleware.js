@@ -45,12 +45,13 @@ module.exports =parser;
         cb( null , newFilename ); 
     }
 
-});  */
+}); 
 
 
-/* const upload = multer({ 
+const upload = multer({ 
   storage
-  , fileFilter  });  */
+  , fileFilter  }); 
+
 
 
 
