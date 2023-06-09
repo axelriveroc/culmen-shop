@@ -12,18 +12,17 @@ const storage2 = new CloudinaryStorage({
   },
 });
 
-const parser = multer({ storage: storage2 });
+//const parser = multer({ storage: storage2 });
 
-module.exports =parser;
 
-/* const fileFilter = (req, file, cb) => {
+/*const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
       cb(null, true);
     } else {
       cb(null, false);
     } 
 
-  } 
+  } */
 
   
   const storage = new CloudinaryStorage({
@@ -34,6 +33,7 @@ module.exports =parser;
   });
    
   const parser = multer({ storage: storage });
+  module.exports =parser;
 
 /*const storage = multer.diskStorage({
     destination: (req, file, cb)=>{
@@ -45,12 +45,12 @@ module.exports =parser;
         cb( null , newFilename ); 
     }
 
-}); 
+});  */
 
 
-const upload = multer({ 
+/* const upload = multer({ 
   storage
-  , fileFilter  }); 
+  , fileFilter  });  */
 
 
 
