@@ -9,7 +9,7 @@ module.exports = ( sequelize, DataTypes )=>{
         autoIncrement: true,
       },
       image_route: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       public_id: {
