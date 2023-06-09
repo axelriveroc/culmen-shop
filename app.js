@@ -3,11 +3,10 @@ const express = require('express');
 const path = require('path');
 const app = express(); 
 // PUERTO A UTILIZAR 
-const PORT = process.env.PORT; 
+const PORT = process.env.PORT ?? 3000; 
 // RUTAS PATH 
 const publicPath = path.join(__dirname ,'/public');
 const cors = require('cors');
-
 
 /************ REQUIRE DE RUTAS  **************/ 
 const mainRoute =  require('./routes/mainRoute.js');  
