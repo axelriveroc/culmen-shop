@@ -1,7 +1,7 @@
-const path = require('path')
+
+const path = require("path");
 
 function checkFileType(file, cb) {
-
   // Allowed ext
   const filetypes = /jpeg|jpg|png|gif/;
 
@@ -14,13 +14,12 @@ function checkFileType(file, cb) {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb('Error: Images Only!');
+    cb("Error: Images Only!");
   }
-
-
 }
-  
-  module.exports = {
-    checkFileType
-  }
-  
+
+module.exports = {
+  checkFileType,
+};
+
+

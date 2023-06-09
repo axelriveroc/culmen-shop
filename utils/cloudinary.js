@@ -1,4 +1,4 @@
-
+/* 
 const cloudinary = require("cloudinary").v2;
 
 // Configuration 
@@ -21,5 +21,5 @@ async function uploadImage(fieldPath){
       };
 }
 
-module.exports = uploadImage;
+module.exports = uploadImage; */
 
