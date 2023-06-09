@@ -2,17 +2,6 @@ const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator'); 
 //const User = require('../models/UserModels'); 
 
-// CLOUDINARY para images
-//const  uploadImage  = require("../utils/cloudinary");
-const cloudinary = require("cloudinary").v2;
-
-// Configuration
-cloudinary.config({
-  cloud_name:process.env.CLOUDINARY_API_NAME,
-  api_key:process.env.CLOUDINARY_API_KEY,
-  api_secret:process.env.CLOUDINARY_API_SECRET,
-});
-
 // SEQUELIZE 
 const { Association } = require("sequelize");
 const { Sequelize } = require("../database/models");
@@ -112,13 +101,6 @@ const userController = {
             avatar: req.file ? req.file.filename : "imagenUsuario.png",
             is_admin: 0, //ver aca si va 0 o 1
           });
-
-          const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: "users",
-          });
-
-          newUser.avatar = result.secure_url;
-          newUser.publicId = result.public_id;
 
           await newUser.save();
 

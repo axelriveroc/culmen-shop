@@ -8,7 +8,6 @@ const PORT = process.env.PORT;
 const publicPath = path.join(__dirname ,'/public');
 const cors = require('cors');
 
-
 /************ REQUIRE DE RUTAS  **************/ 
 const mainRoute =  require('./routes/mainRoute.js');  
 const productsRoute = require('./routes/productsRoute');
@@ -65,17 +64,6 @@ app.use('/user' , usersRoute);
 /****************  API ROUTES ****************************/
 app.use('/api/users' , apiUsersRoute); 
 app.use('/api/products' , apiProductsRoute); 
-
-
-/********   CLOUDINARY   ********/
-const cloudinary = require("cloudinary").v2;
-
-// Configuration
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_API_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 /******************  MANEJADOR DE ERRORES MIDDLEWARE   *********************/
 app.use((err, req, res, next) => {
