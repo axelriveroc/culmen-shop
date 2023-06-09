@@ -80,4 +80,3 @@ module.exports =parser;
   storage
   , fileFilter  });  */
 
-module.exports = parser; 
