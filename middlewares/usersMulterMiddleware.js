@@ -4,15 +4,6 @@ const multer = require('multer');
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-
-/* const storage2 = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "users",
-    public_id: (req, file) => "computed-filename-using-request",
-  },
-}); */
-
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -23,6 +14,15 @@ const storage = new CloudinaryStorage({
 const parser = multer({ storage: storage });
 
 module.exports =parser;
+
+/* const storage2 = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "users",
+    public_id: (req, file) => "computed-filename-using-request",
+  },
+}); */
+
 
 /* const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
